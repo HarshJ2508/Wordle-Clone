@@ -1,0 +1,87 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+nav {
+    width: 100vw;
+    height: 60px;
+    background-color: rgb(174, 174, 247);
+}
+
+.mainSection {
+    width: 100vw;
+    height: calc(100vh - 60px);
+    background-color: rgb(222, 143, 143);
+}
+
+.gridContainer {
+    display: none;
+    width: 100vw;
+    padding: 20px;
+}
+
+.activeGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#row-1, #row-2 {
+    margin: 0px auto;
+}
+
+.col {
+    width: 55px;
+    height: 55px;
+    outline: none;
+    text-align: center;
+    font-size: 2.5rem;
+    caret-color: transparent;
+    text-transform: uppercase;
+    color: black;
+    /* border: 5px solid black; */
+}
+
+.greenCol {
+    background-color: rgb(152, 246, 152);
+}
+
+.yellowCol {
+    background-color: rgba(255, 255, 83, 0.952);
+}
+
+.grayCol {
+    background-color: rgb(209, 206, 206);
+}
+
+.spinner {
+    position: relative;
+    top: -60%;
+    left: 48%;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 9px solid;
+    border-color: #dbdcef;
+    border-right-color: #474bff;
+    animation: spinner-d3wgkg 1s infinite linear;
+ }
+ 
+ @keyframes spinner-d3wgkg {
+    to {
+       transform: rotate(1turn);
+    }
+ }
+
+.hideSpinner {
+    display: none;
+}
+
