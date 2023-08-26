@@ -4,22 +4,33 @@
     box-sizing: border-box;
 }
 
+:root {
+    --green: #6aaa64;
+    --yellow: #c9b458;
+    --gray: #86888a;
+    --white: #f0f0f0;
+}
+
 .wrapper {
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
 }
 
+/* -------------------------------------------------------------------------------------------------- */
+
 nav {
     width: 100vw;
     height: 60px;
-    background-color: rgb(174, 174, 247);
+    /* background-color: rgb(174, 174, 247); */
 }
+
+/* -------------------------------------------------------------------------------------------------- */
 
 .mainSection {
     width: 100vw;
     height: calc(100vh - 60px);
-    background-color: rgb(222, 143, 143);
+    /* background-color: rgb(222, 143, 143); */
 }
 
 .gridContainer {
@@ -34,7 +45,7 @@ nav {
     gap: 6px;
 }
 
-#row-1, #row-2 {
+#row-1, #row-2, #row-3, #row-4, #row-5, #row-6 {
     margin: 0px auto;
 }
 
@@ -47,20 +58,78 @@ nav {
     caret-color: transparent;
     text-transform: uppercase;
     color: black;
-    /* border: 5px solid black; */
+    border: 2px solid rgb(196, 192, 192);
 }
 
+/* -------------------------------------------------------------------------------------------------- */
+
+.scaleCol {
+    border: 2.5px solid rgb(124, 124, 124);
+    animation: scale-up-center 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0s both;
+}
+
+@keyframes scale-up-center {
+    0% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        
+    }
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+
 .greenCol {
-    background-color: rgb(152, 246, 152);
+    animation: flip-and-green 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;   
+}
+
+@keyframes flip-and-green {
+    0% {
+        transform: rotateX(0);
+    }
+    100% {
+        transform: rotateX(360deg);
+        background-color: var(--green);
+        color: var(--white);
+        border: none;
+        
+    }
 }
 
 .yellowCol {
-    background-color: rgba(255, 255, 83, 0.952);
+    animation: flip-and-yellow 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;   
+}
+
+@keyframes flip-and-yellow {
+    0% {
+        transform: rotateX(0);
+    }
+    100% {
+        transform: rotateX(360deg);
+        background-color: var(--yellow);
+        color: var(--white); 
+        border: none;
+    }
 }
 
 .grayCol {
-    background-color: rgb(209, 206, 206);
+    animation: flip-and-gray 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;   
 }
+
+@keyframes flip-and-gray {
+    0% {
+        transform: rotateX(0);
+    }
+    100% {
+        transform: rotateX(360deg);
+        background-color: var(--gray); 
+        color: var(--white);
+        border: none;
+    }
+}
+
+/* -------------------------------------------------------------------------------------------------- */
 
 .spinner {
     position: relative;
@@ -85,3 +154,160 @@ nav {
     display: none;
 }
 
+/* -------------------------------------------------------------------------------------------------- */
+
+.keyBoardContainer {
+    width: 85vw;
+    margin: 0px auto;
+    display: none;
+    outline: none;
+}
+
+.activeKeys {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.key {
+    width: 40px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0px 5px;
+    background-color: rgb(206, 206, 206);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.greenKey {
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.yellowKey {
+    background-color: var(--yellow);
+    color: var(--white);
+}
+
+.grayKey {
+    background-color: var(--gray);
+    color: var(--white);
+}
+
+.enter {
+    width: 80px;
+    font-weight: 700;
+}
+
+.backspace {
+    width: 60px;
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+.shakeCol {
+    animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+@keyframes shake-horizontal {
+    0%,
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70% {
+      -webkit-transform: translateX(-10px);
+              transform: translateX(-10px);
+    }
+    20%,
+    40%,
+    60% {
+      -webkit-transform: translateX(10px);
+              transform: translateX(10px);
+    }
+    80% {
+      -webkit-transform: translateX(8px);
+              transform: translateX(8px);
+    }
+    90% {
+      -webkit-transform: translateX(-8px);
+              transform: translateX(-8px);
+    }
+  }
+
+/* -------------------------------------------------------------------------------------------------- */
+
+.toaster {
+    visibility: hidden;
+    position: relative;
+    top: -93%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+    background-color: black;
+    color: var(--white);
+    /* opacity: 0; */
+}
+/* 
+.activeToaster {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+        visibility: hidden;
+    }
+}
+
+@keyframes fadeout {
+    from {opacity: 1;}
+    to {opacity: 0;}
+} */
+
+
+
+@media screen and (max-width: 615px) {
+    .col{
+        width: 43px;
+        height: 43px;
+    }
+    .keyBoardContainer {
+        width: 98vw;
+    }
+    .keyBoardContainer > div {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+}
+
+/* galaxy fold */
+@media screen and (max-width: 281px) {
+    .keyBoardContainer > div {
+        width: 100%;
+    }
+    .key {
+        width: 25px;
+        height: 35px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+    .enter {
+        width: 80px;
+        font-size: 13px;
+    }
+}
