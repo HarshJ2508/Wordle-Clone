@@ -91,6 +91,10 @@ function fillLetterInCol(key) {
 
 function checkWord(word, wordToGuessed) {
     if(wordToGuessed !== null) {
+        // Removing the previous add animation 
+        for(let i = 0; i < colSize; ++i) {
+            if(col[i].classList.contains('shakeCol')) col[i].classList.remove('shakeCol')
+        }
         // Check if word is a valid dictionary word or not with the help of an API 
         isAValidWord(word)
             .then((isValid) => {
@@ -100,7 +104,6 @@ function checkWord(word, wordToGuessed) {
                     let i = 0, cnt = 0
                     for(i = 0; i < colSize; i++) {
                         var key
-                        if(col[i].classList.contains('shakeCol')) col[i].classList.remove('shakeCol')
                         for(let j = 0; j < 28; j++) {
                             if(keys[j].value.toLowerCase() === word[i]) {
                                 key = keys[j] 
@@ -123,28 +126,30 @@ function checkWord(word, wordToGuessed) {
                             col[i].classList.add('grayCol')
                             if(!key.classList.contains('greenKey') || !key.classList.contains('yellowKey')) key.classList.add('grayKey')
                         }
-                        col[i].style["animation-delay"] = `${i * 0.5}s`
+                        col[i].style["animation-delay"] = `${i * 100}ms`
+                        col[i].style["animation-duration"] = `1000ms`
                     }
-                    if(cnt === colSize || rowNo === rowSize) {
-                        setTimeout(() => {
-                            if(rowNo === rowSize) {
+                    // if(cnt === colSize || rowNo === rowSize) {
+                    //     setTimeout(() => {
+                    //         if(rowNo === rowSize) {
                                
-                            }
-                            else if(cnt === colSize) {
-                                gridContainer.classList.remove("activeGrid")
-                                keyboardContainer.classList.remove("activeKeys")
-                            }
-                        }, 3500)
-                    }
+                    //         }
+                    //         else if(cnt === colSize) {
+                    //             gridContainer.classList.remove("activeGrid")
+                    //             keyboardContainer.classList.remove("activeKeys")
+                    //         }
+                    //     }, 3500)
+                    // }
                     rowNo += 1
                     init(rowNo)
                 }
                 else{
                     // Invalid Word
-                    //  document.querySelector('.toaster').classList.add("activeToaster")
+                    // Add animation
                     for(let i = 0; i < colSize; i++) {
                         col[i].classList.add('shakeCol')
                     }
+                     // Toaster
                 }
         })
        
@@ -176,7 +181,6 @@ async function isAValidWord(word) {
 // CASE - 2: When user presses any key from keyboard displayed on UI
 const keys = document.querySelectorAll('.key')
 
-
 keys.forEach((key) => {
     key.addEventListener('click', () => {
         if(key.value === "Backspace" || key.value === "Enter") {
@@ -187,7 +191,64 @@ keys.forEach((key) => {
 }) 
 
 
+// ------------------------------------------------------------------------------------------------- 
 
+const dark_mode = document.querySelector('.dark-mode')
+const light_mode = document.querySelector('.light-mode')
 
+const css = {
+    dark: {
+        title: '#ffffff',
+        column: '#000000',
+        column_border: '2px solid #7a7979',
+        column_text: '#ffffff',
+        background: '#000',
+    },
+    light: {
+        title: '#000000',
+        column: '#ffffff',
+        column_border: '2px solid #cbc9c9',
+        column_text: '#000000',
+        background: '#fff'
+    }
+}
+
+function changeMode(mode) {
+    // change to light mode
+    if(mode === 'dark') { 
+        light_mode.style.display = 'none'
+        dark_mode.style.display = 'block'
+        document.querySelector('.wrapper').style['background-color'] =  `${css.light.background}`
+        document.querySelector('.header').style.color = `${css.light.title}`
+        document.querySelectorAll('.col').forEach((col) => {
+            col.style['background-color'] = `${css.light.column}`
+            col.style['border'] = `${css.light.column_border}`
+            col.style.color = `${css.light.column_text}`
+        })
+        localStorage.setItem('mode', "light")
+    }
+    // change to dark mode
+    else if(mode === 'light') {
+        dark_mode.style.display = 'none'
+        light_mode.style.display = 'block'
+        document.querySelector('.wrapper').style['background-color'] =  `${css.dark.background}`
+        document.querySelector('.header').style.color = `${css.dark.title}`
+        document.querySelectorAll('.col').forEach((col) => {
+            col.style['background-color'] = `${css.dark.column}`
+            col.style['border'] = `${css.dark.column_border}`
+            col.style.color = `${css.dark.column_text}`
+        })
+        localStorage.setItem('mode', "dark")
+    }
+}
+
+dark_mode.addEventListener('click', () => changeMode('light'))
+
+light_mode.addEventListener('click', () => changeMode('dark'))
+
+var modeType = localStorage.getItem('mode')
+
+if(modeType === null || modeType === 'light') changeMode('dark')
+else if(modeType === 'dark') changeMode('light')
 
 
