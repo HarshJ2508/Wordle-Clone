@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
 * {
     margin: 0px;
     padding: 0px;
@@ -14,15 +16,30 @@
 .wrapper {
     width: 100vw;
     height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 /* -------------------------------------------------------------------------------------------------- */
 
 nav {
-    width: 100vw;
+    margin: 0px auto;
+    padding-top: 10px;
+    width: 1100px;
     height: 60px;
     /* background-color: rgb(174, 174, 247); */
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.nav > h1, div {
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    /* color: white; */
+}
+
+.dark-mode{
+    padding-top: 3px;
 }
 
 /* -------------------------------------------------------------------------------------------------- */
@@ -57,8 +74,7 @@ nav {
     font-size: 2.5rem;
     caret-color: transparent;
     text-transform: uppercase;
-    color: black;
-    border: 2px solid rgb(196, 192, 192);
+    cursor: default;
 }
 
 /* -------------------------------------------------------------------------------------------------- */
@@ -140,7 +156,7 @@ nav {
     border-radius: 50%;
     border: 9px solid;
     border-color: #dbdcef;
-    border-right-color: #474bff;
+    border-right-color: #000000;
     animation: spinner-d3wgkg 1s infinite linear;
  }
  
@@ -176,7 +192,8 @@ nav {
     font-size: 20px;
     font-weight: bold;
     padding: 0px 5px;
-    background-color: rgb(206, 206, 206);
+    /* color: white; */
+    background-color: #adadad;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -242,47 +259,23 @@ nav {
 
 /* -------------------------------------------------------------------------------------------------- */
 
-.toaster {
-    visibility: hidden;
-    position: relative;
-    top: -93%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: fit-content;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 20px;
-    background-color: black;
-    color: var(--white);
-    /* opacity: 0; */
-}
-/* 
-.activeToaster {
-    visibility: visible;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-@keyframes fadein {
-    from{
-        opacity: 0;
+@media screen and (max-width: 1100px) {
+    nav {
+        width: 80vw;
     }
-    to{
-        opacity: 1;
-        visibility: hidden;
+    nav > h1 {
+        font-size: 1.5rem;
+    }
+    .dark-mode{
+        padding-top: 2px;
     }
 }
-
-@keyframes fadeout {
-    from {opacity: 1;}
-    to {opacity: 0;}
-} */
-
-
 
 @media screen and (max-width: 615px) {
     .col{
         width: 43px;
         height: 43px;
+        font-size: 2rem;
     }
     .keyBoardContainer {
         width: 98vw;
