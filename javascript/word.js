@@ -24,6 +24,3 @@ export async function getDetailsOfWord(wordToGuessed, flag) {
         if(flag) generateWord()
     }
 }
-
-
-
